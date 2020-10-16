@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
-const { saltRound } = require('../../config');
 
-const encrypt = (string) => {
-    const salt = bcrypt.genSaltSync(saltRound);
+const encrypt = (string, keyRounds) => {
+    const salt = bcrypt.genSaltSync(keyRounds);
     const hash = bcrypt.hashSync(string, salt);
     return hash;
 };

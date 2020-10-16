@@ -1,24 +1,18 @@
 const express = require('express');
-const { registerSchema } = require('../../schema');
-const { encrypt } = require('../../utils');
+const {
+    handlers: { createHandler }
+} = require('custom-error-exceptions');
+
+const { registerSchema: schema } = require('../../schema');
+const { validationSchema } = require('../../utils');
+const { registerUserHandler: handler } = require('../../handlers');
 
 const router = express.Router();
 
-router.post('/users/register', async (req, res) => {
-    const { UserDbConnector } = res.locals;
-    try {
-        const { error, value } = registerSchema.validate(req.body);
-        if (error) {
-            throw new Error(error.message);
-        }
-        value.password = encrypt(value.password);
-        const user = await UserDbConnector.insert(value);
-        const resp = { ...user.dataValues };
-        delete resp.password;
-        res.send(resp);
-    } catch(e) {
-        res.send({ message: e.message });
-    }
-});
+router.post(
+    '/users/register',
+    validationSchema(schema),
+    createHandler(handler)
+);
 
 module.exports = router;

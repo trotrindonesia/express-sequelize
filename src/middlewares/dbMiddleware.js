@@ -6,17 +6,19 @@ const dbMiddleware = (app, config) => {
     const { dbConfig } = config;
     const db = database(app, dbConfig);
     app.use(async (req, res, next) => {
-        res.locals.UserDbConnector = new DbConnector({ table: userModel(db) });
+        res.locals.database = db;
+        res.locals.UserDbConnector = new DbConnector({ db, table: userModel(db) });
         next();
     })
 }
 
-const closeDbConnection = (app) => {
-    return (req, res, next) => {
-        const sequelize = app.locals.db;
-        sequelize.close()
-        next();
-    }
+const closeDbConnection = (req, res, next) => {
+    res.on('finish', () => {
+        const sequelize = res.locals.database;
+        sequelize.close();
+        console.log('database closed');
+    });
+    next();
 }
 
 module.exports = { dbMiddleware, closeDbConnection };

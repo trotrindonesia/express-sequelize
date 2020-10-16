@@ -1,18 +1,12 @@
 const express = require('express');
+const {
+    handlers: { createHandler }
+} = require('custom-error-exceptions');
+
+const { getUsersHandler: handler } = require('../../handlers');
 
 const router = express.Router();
 
-router.get('/users', async (req, res) => {
-    const { UserDbConnector } = res.locals;
-    try {
-        const filter = {
-            attributes: { exclude: ['password'] }
-        };
-        const users = await UserDbConnector.findAll(filter);
-        res.send(users);
-    } catch(e) {
-        res.send({ message: e.message });
-    }
-});
+router.get('/users', createHandler(handler));
 
 module.exports = router;

@@ -1,6 +1,10 @@
 require('dotenv').config();
 
-const { typeParser: { isString, isNumber } } = require('../src/utils');
+const {
+    typeParser: { isString, isNumber },
+    encrypt,
+    compare
+} = require('../src/utils');
 
 const config = {
     server: {
@@ -22,7 +26,12 @@ const config = {
         username: isString(process.env.DB_USERNAME),
         password: isString(process.env.DB_PASSWORD)
     },
-    saltRound: isNumber(process.env.SALT_ROUND)
-};
+    encryption: {
+        keyRounds: isNumber(process.env.SALT_ROUND),
+        encrypt,
+        compare
+    }
+
+}
 
 module.exports = config;

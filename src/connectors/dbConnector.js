@@ -1,6 +1,7 @@
 class DbConnector {
     constructor(args) {
         this.table = args.table
+        this.db = args.db
     }
 
     async findByPk(id) {
@@ -41,6 +42,10 @@ class DbConnector {
     async delete(filter) {
         const result = await this.table.destroy(filter);
         return result;
+    }
+
+    _closeConnection() {
+        this.db.close();
     }
 };
 
