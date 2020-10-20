@@ -29,7 +29,7 @@ Use rest client applications such as insomnia or postman
 # ==================
 Path 			: http://localhost:3000/users/register
 Method			: POST
-Content-Type 	: application/json
+Content-Type 		: application/json
 Body			:
 {
 	"firstname": "John",
@@ -43,7 +43,7 @@ Body			:
 # ==================
 Path 			: http://localhost:3000/users/login
 Method			: POST
-Content-Type 	: application/json
+Content-Type 		: application/json
 Body			:
 {
 	"email": "johndoe@gmail.com",
