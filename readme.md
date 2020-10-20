@@ -2,7 +2,7 @@
 ## Installation
 
 ```bash
-$ git clone https://github.com/trotr-dev/express-sequelize.git
+$ git clone https://github.com/trotrindonesia/express-sequelize.git
 $ cd express-sequelize
 $ npm install
 ```
