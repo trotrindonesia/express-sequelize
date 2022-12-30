@@ -18,7 +18,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "custom-error-exceptions": "^1.2.2",
+    "custom-error-exceptions": "^1.2.4",
     "express": "^4.17.1",
     "joi": "^17.2.1",
     "mysql2": "^2.2.5",
